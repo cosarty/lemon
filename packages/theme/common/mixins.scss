@@ -1,0 +1,11 @@
+@use 'sass:map';
+@use './config' as *;
+@use './var' as *;
+
+@mixin set-css-color {
+  @each $type in map.keys($colors) {
+    @each $item in map.keys(map.get($colors, $type)) {
+      --#{$namespace}-#{$type}-#{$item}: #{map.get($colors, $type, $item)};
+    }
+  }
+}

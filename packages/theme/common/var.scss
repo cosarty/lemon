@@ -1,0 +1,39 @@
+@use 'sass:map';
+
+$colors: map.deep-merge(
+  (
+    'accents': (
+      '1': #fafafa,
+      '2': #eaeaea,
+      '3': #999,
+      '4': #888,
+      '5': #666,
+      '6': #444,
+      '7': #333,
+      '8': #111,
+    ),
+    'success': (
+      'base': #0070f3,
+      'light': #3291ff,
+      'dark': #0761d1,
+    ),
+    'error': (
+      'base': #e00,
+      'light': #ff1a1a,
+      'dark': #c50000,
+    ),
+    'warning': (
+      'base': #f5a623,
+      'light': #f7b955,
+      'dark': #f49b0b,
+    ),
+    'highlight': (
+      'purple': #f81ce5,
+      'magenta': #eb367f,
+      'pink': #ff0080,
+      'yellow': #fff500,
+      'cyan': #79ffe1,
+    ),
+  ),
+  ()
+);

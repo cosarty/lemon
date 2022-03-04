@@ -1,22 +1,17 @@
 <template>
-  <div>
-    <slot></slot>
-  </div>
+  <div><slot></slot></div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'LeSelect',
+  name: 'LeSelectOption',
   setup() {
     return {}
   },
 })
 </script>
 
-<style scoped lang="scss">
-div {
-  color: var(--le-success-base);
-}
+<style scoped>
 </style>

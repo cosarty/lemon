@@ -6,9 +6,10 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { createName } from '../../utils'
 
 export default defineComponent({
-  name: 'LeSelect',
+  name: createName('Select'),
   setup() {
     return {}
   },

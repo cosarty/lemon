@@ -1,0 +1,28 @@
+.select {
+  &-content {
+    font-size: 14px;
+    display: inline-flex;
+    position: relative;
+    // overflow: hidden;
+    box-sizing: border-box;
+    user-select: none;
+    > input {
+      width: 200px;
+      height: 20px;
+      -webkit-appearance: none;
+      border: 1px solid var(--le-accents-3);
+      outline-color: var(--le-accents-6);
+      cursor: pointer;
+    }
+    &-menu {
+      position: absolute;
+      top: 103%;
+      width: 100%;
+      box-sizing: border-box;
+      max-width: 100%;
+      max-height: 300px;
+      border: 1px solid var(--le-accents-6);
+      // background-color: aqua;
+    }
+  }
+}

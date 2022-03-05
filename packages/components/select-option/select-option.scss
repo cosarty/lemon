@@ -1,0 +1,9 @@
+.select {
+  &-option {
+    padding: 6px;
+    &:hover,
+    &__active {
+      background-color: aqua;
+    }
+  }
+}

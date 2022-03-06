@@ -14,7 +14,7 @@ import { defineComponent, ref, watch } from 'vue'
 
 export default defineComponent({
   setup() {
-    const value = ref<string>('')
+    const value = ref<string | string[]>(['a', 'b'])
 
     watch(value, () => {
       console.log(value.value)

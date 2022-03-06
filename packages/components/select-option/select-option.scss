@@ -1,6 +1,10 @@
 .select {
   &-option {
-    padding: 6px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 6px;
     &:hover,
     &__active {
       background-color: aqua;

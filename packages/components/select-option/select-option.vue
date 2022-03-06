@@ -20,12 +20,18 @@ export default defineComponent({
     disabled: Boolean,
   },
   setup(props) {
-    const { updateValue, selectValue } = inject<any>('select')
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const { updateValue, selectValue, multiple } = inject<any>('select', null)
 
     const handelClick = () => {
       updateValue(props.value)
     }
-    const setActive = computed(() => selectValue.value === props.value)
+    const setActive = computed(() => {
+      const { value } = props
+      return multiple && Array.isArray(selectValue.value)
+        ? selectValue.value.includes(value)
+        : selectValue.value === props.value
+    })
 
     return { handelClick, setActive }
   },

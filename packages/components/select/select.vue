@@ -1,13 +1,17 @@
 <template>
-  <div class="select-content" @click="selectClickHandel" ref="SelectRef">
-    <select-multiple
+  <div class="select-content" ref="SelectRef" @click="selectClickHandel">
+    <div
       v-if="multiple && Array.isArray(modelValue)"
-      :checkSelect="checkSelect"
-      @remove-check="updateValue"
-    />
+      class="select-content-multiple"
+    >
+      <span v-for="(_, i) of select" :key="i"
+        >{{ _.label }} <clear-icon @click="removeCheck(_.value)"
+      /></span>
+    </div>
     <input
+      v-if="!multiple"
       type="text"
-      :value="modelValue"
+      :value="select[0].label"
       :placeholder="placeholder"
       :readonly="!isSearch"
     />
@@ -18,26 +22,37 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, provide, ref, watch, PropType, computed } from 'vue'
+import {
+  defineComponent,
+  provide,
+  ref,
+  watch,
+  reactive,
+  toRefs,
+  PropType,
+} from 'vue'
 
 import { useAway } from '../../hooks'
+// import {  toRawType } from '@vue/shared'
 import { createName } from '../../utils'
-import { useState } from '../../hooks'
+import { SelectOptionProxy } from './inteface'
 import SelectMenu from './select-menu.vue'
+import ClearIcon from './clear-icon.vue'
 
-import SelectMultiple from './select-multiple.vue'
 import './select.scss'
 
 export default defineComponent({
   name: createName('Select'),
   components: {
     SelectMenu,
-
-    SelectMultiple,
+    ClearIcon,
   },
   props: {
     modelValue: {
-      type: [String, Array] as PropType<string | string[]>,
+      type: [String, Array, Number] as PropType<
+        string | number | (string | number)[]
+      >,
+      default: undefined,
     },
     placeholder: { type: String, default: '' },
     multiple: Boolean,
@@ -49,78 +64,114 @@ export default defineComponent({
     },
   },
   emits: ['update:modelValue', 'change'],
-  setup(props, { emit }) {
-    const [selectMenuVisibel, setSelectMenuVisibel] = useState<boolean>(false)
-    const [selectValue, setSelectValue] = useState<string | string[]>([])
-
+  setup(props, ctx) {
+    const selectMenuVisibel = ref<boolean>(false)
+    const state = reactive<{
+      options: Map<string | number, SelectOptionProxy>
+      select: { value: string | number; label: string }[]
+    }>({
+      options: new Map(),
+      select: props.multiple ? [] : ({} as any),
+    })
     const SelectRef = ref<Element | undefined>(undefined)
 
-    // 设置选择属性
-    const checkSelect = computed({
-      get() {
-        return selectValue.value as string[] | string
-      },
-      set(check: string | string[]) {
-        if (props.multiple && !Array.isArray(check)) {
-          const select = Array.isArray(selectValue.value)
-            ? selectValue.value
-            : [selectValue.value]
-          if (!select.includes(check)) {
-            setSelectValue([...select, check] as string[])
-            return
-          }
-
-          setSelectValue(select.filter((i) => i !== check) as string[])
-          return
-        }
-
-        if (Array.isArray(check)) {
-          setSelectValue(check)
-          return
-        }
-
-        setSelectValue(check.toString())
-      },
-    })
-
-    const updateValue = (v: string) => {
-      checkSelect.value = v
+    const removeCheck = (selected: any) => {
+      const value = ((props.modelValue as any[]) || []).slice()
+      const idx = value.indexOf(selected)
+      if (idx !== -1) {
+        value.splice(idx, 1)
+      }
+      ctx.emit('update:modelValue', value)
     }
 
-    const selectClickHandel = () => {
-      setSelectMenuVisibel(!selectMenuVisibel.value)
+    const addOptions = (vm: SelectOptionProxy) => {
+      state.options.set(vm.value, vm)
     }
+    const handleOptionsClick = (vm: SelectOptionProxy) => {
+      if (props.multiple && Array.isArray(props.modelValue)) {
+        const value = ((props.modelValue as any[]) || []).slice()
+        const idx = value.indexOf(vm.value)
+        if (idx !== -1) {
+          value.splice(idx, 1)
+        } else {
+          value.push(vm.value)
+        }
+        ctx.emit('update:modelValue', value)
+      } else {
+        ctx.emit('update:modelValue', vm.value)
+      }
+    }
+    const destoryOption = (vm: SelectOptionProxy) => {
+      state.options.delete(vm.value)
+      if (vm.value === props.modelValue) {
+        ctx.emit('update:modelValue', '')
+      } else if (props.multiple) {
+        const value = ((props.modelValue as any[]) || []).slice()
+        const idx = value.indexOf(vm.value)
+        if (idx !== -1) {
+          value.splice(idx, 1)
+        }
+        ctx.emit('update:modelValue', value)
+      }
+    }
+    const getOptions = (option: any): any[] => {
+      if (props.multiple) {
+        const result: any = []
+        if (Array.isArray(props.modelValue)) {
+          props.modelValue.forEach((v: string | number) => {
+            const op = state.options.get(v)
+            op &&
+              result.push({
+                value: op.value,
+                label: op.label,
+              })
+          })
+        }
 
-    useAway(SelectRef, () => {
-      setSelectMenuVisibel(false)
-    })
+        return result
+      }
+      const op = state.options.get(option)
+      if (op) {
+        return [
+          {
+            value: op.value,
+            label: op.label,
+          },
+        ]
+      }
+      return []
+    }
 
     watch(
       () => props.modelValue,
-      (cur) => {
-        if (props.multiple && !Array.isArray(cur)) return
-        checkSelect.value = cur as string | string[]
+      () => {
+        state.select = getOptions(props.modelValue)
       },
       {
-        immediate: true,
+        flush: 'post',
+        deep: true,
       }
     )
-
-    watch(selectValue, (cur) => {
-      emit('change', cur)
-      emit('update:modelValue', cur)
+    useAway(SelectRef, () => {
+      selectMenuVisibel.value = false
     })
+    const selectClickHandel = () => {
+      selectMenuVisibel.value = !selectMenuVisibel.value
+    }
 
-    // 暴露出去
-    provide('select', { updateValue, selectValue, multiple: props.multiple })
-
+    provide('select', {
+      addOptions,
+      handleOptionsClick,
+      destoryOption,
+      ...toRefs(state),
+      multiple: props.multiple,
+    })
     return {
-      selectMenuVisibel,
-      selectClickHandel,
-      selectValue,
+      ...toRefs(state),
       SelectRef,
-      checkSelect,
-      updateValue,
+      selectMenuVisibel,
+      removeCheck,
+      selectClickHandel,
     }
   },
 })

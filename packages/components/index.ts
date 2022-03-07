@@ -1,5 +1,5 @@
-import { LeSelect } from './select'
-import { LeSelectOption } from './select-option'
+import { LeSelect, LeSelectOption } from './select'
+
 
 
 

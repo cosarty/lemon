@@ -41,11 +41,14 @@ export default defineComponent({
     }
     const setActive = computed(() => {
       const { value } = props
-      console.log('value: ', value)
-      console.log(select.select.value)
-      return select.multiple && Array.isArray(select.select.value)
-        ? select.select.value.includes(value)
-        : select.select.value === props.value
+
+      if (Array.isArray(select.select.value)) {
+        return (
+          select.select.value.findIndex((v: any) => v.value === value) !== -1
+        )
+      }
+
+      return false
     })
 
     return { selectOptionClick, setActive }

@@ -5,13 +5,13 @@
       class="select-content-multiple"
     >
       <span v-for="(_, i) of select" :key="i"
-        >{{ _.label }} <clear-icon @click="removeCheck(_.value)"
+        >{{ _.label }} <clear-icon @click.stop="removeCheck(_.value)"
       /></span>
     </div>
     <input
+      :value="select[0]?.label"
       v-if="!multiple"
       type="text"
-      :value="select[0].label"
       :placeholder="placeholder"
       :readonly="!isSearch"
     />
@@ -75,6 +75,10 @@ export default defineComponent({
     })
     const SelectRef = ref<Element | undefined>(undefined)
 
+    // const checkModelValue = ()=>{
+
+    // }
+
     const removeCheck = (selected: any) => {
       const value = ((props.modelValue as any[]) || []).slice()
       const idx = value.indexOf(selected)
@@ -115,18 +119,21 @@ export default defineComponent({
       }
     }
     const getOptions = (option: any): any[] => {
-      if (props.multiple) {
+      if (props.multiple && Array.isArray(option)) {
         const result: any = []
-        if (Array.isArray(props.modelValue)) {
-          props.modelValue.forEach((v: string | number) => {
-            const op = state.options.get(v)
-            op &&
-              result.push({
+
+        option.forEach((v: string | number) => {
+          const op = state.options.get(v)
+          op
+            ? result.push({
                 value: op.value,
                 label: op.label,
               })
-          })
-        }
+            : result.push({
+                value: v,
+                label: v,
+              })
+        })
 
         return result
       }
@@ -139,7 +146,12 @@ export default defineComponent({
           },
         ]
       }
-      return []
+      return [
+        {
+          value: option,
+          label: option,
+        },
+      ]
     }
 
     watch(
@@ -147,10 +159,7 @@ export default defineComponent({
       () => {
         state.select = getOptions(props.modelValue)
       },
-      {
-        flush: 'post',
-        deep: true,
-      }
+      { immediate: true, flush: 'post', deep: true }
     )
     useAway(SelectRef, () => {
       selectMenuVisibel.value = false

@@ -14,7 +14,7 @@ import { defineComponent, ref, watch } from 'vue'
 
 export default defineComponent({
   setup() {
-    const value = ref(['gfd', 'fdsf'])
+    const value = ref('b')
 
     watch(value, () => {
       console.log(value.value)

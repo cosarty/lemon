@@ -1,9 +1,6 @@
 <template>
   <div class="select-content" ref="SelectRef" @click="selectClickHandel">
-    <div
-      v-if="multiple && Array.isArray(modelValue)"
-      class="select-content-multiple"
-    >
+    <div v-if="multiple && select.length !== 0" class="select-content-multiple">
       <span v-for="(_, i) of select" :key="i"
         >{{ _.label }} <clear-icon @click.stop="removeCheck(_.value)"
       /></span>
@@ -22,24 +19,25 @@
 </template>
 
 <script lang="ts">
-import {
-  defineComponent,
-  provide,
-  ref,
-  watch,
-  reactive,
-  toRefs,
-  PropType,
-} from 'vue'
+import { defineComponent, provide, ref, watch, reactive, toRefs } from 'vue'
 
 import { useAway } from '../../hooks'
-// import {  toRawType } from '@vue/shared'
 import { createName } from '../../utils'
 import { SelectOptionProxy } from './inteface'
 import SelectMenu from './select-menu.vue'
 import ClearIcon from './clear-icon.vue'
 
 import './select.scss'
+
+interface SelectType {
+  label: string
+  value: number | string
+}
+
+const defaultSelect: SelectType = {
+  label: '',
+  value: '',
+} as SelectType
 
 export default defineComponent({
   name: createName('Select'),
@@ -48,10 +46,9 @@ export default defineComponent({
     ClearIcon,
   },
   props: {
+    // 完成 multiple disabled
     modelValue: {
-      type: [String, Array, Number] as PropType<
-        string | number | (string | number)[]
-      >,
+      type: [String, Array, Number],
       default: undefined,
     },
     placeholder: { type: String, default: '' },
@@ -68,99 +65,75 @@ export default defineComponent({
     const selectMenuVisibel = ref<boolean>(false)
     const state = reactive<{
       options: Map<string | number, SelectOptionProxy>
-      select: { value: string | number; label: string }[]
+      select: SelectType[]
     }>({
       options: new Map(),
-      select: props.multiple ? [] : ({} as any),
+      select: [defaultSelect],
     })
     const SelectRef = ref<Element | undefined>(undefined)
 
-    // const checkModelValue = ()=>{
+    const checkSelectValue = (selected: any, isAdd?: boolean) => {
+      const select = getOptions(selected)
+      console.log('select: ', select)
 
-    // }
+      const idx = state.select.findIndex((s) => s.value === select[0]?.value)
+      if (props.multiple) {
+        idx !== -1 && state.select.splice(idx, 1)
+        idx === -1 && isAdd && state.select.push(select[0])
+        ctx.emit(
+          'update:modelValue',
+          state.select.map((selects) => selects.value)
+        )
+      }
+
+      if (!props.multiple) {
+        state.select[0] = select[0]
+        ctx.emit('update:modelValue', state.select[0]?.value)
+      }
+    }
 
     const removeCheck = (selected: any) => {
-      const value = ((props.modelValue as any[]) || []).slice()
-      const idx = value.indexOf(selected)
-      if (idx !== -1) {
-        value.splice(idx, 1)
-      }
-      ctx.emit('update:modelValue', value)
+      checkSelectValue(selected)
     }
 
     const addOptions = (vm: SelectOptionProxy) => {
       state.options.set(vm.value, vm)
     }
     const handleOptionsClick = (vm: SelectOptionProxy) => {
-      if (props.multiple && Array.isArray(props.modelValue)) {
-        const value = ((props.modelValue as any[]) || []).slice()
-        const idx = value.indexOf(vm.value)
-        if (idx !== -1) {
-          value.splice(idx, 1)
-        } else {
-          value.push(vm.value)
-        }
-        ctx.emit('update:modelValue', value)
-      } else {
-        ctx.emit('update:modelValue', vm.value)
-      }
+      checkSelectValue(vm.value, true)
     }
     const destoryOption = (vm: SelectOptionProxy) => {
       state.options.delete(vm.value)
       if (vm.value === props.modelValue) {
         ctx.emit('update:modelValue', '')
-      } else if (props.multiple) {
-        const value = ((props.modelValue as any[]) || []).slice()
-        const idx = value.indexOf(vm.value)
-        if (idx !== -1) {
-          value.splice(idx, 1)
-        }
-        ctx.emit('update:modelValue', value)
+        return
       }
+      checkSelectValue(vm.value)
     }
-    const getOptions = (option: any): any[] => {
-      if (props.multiple && Array.isArray(option)) {
-        const result: any = []
+    const getOptions = (option: any): SelectType[] => {
+      const value = Array.isArray(option) ? option : [option]
+      const result: any = []
+      if (state.options.size === 0) return []
+      value.forEach((v: string | number) => {
+        const op = state.options.get(v)
+        op
+          ? result.push({
+              value: op.value,
+              label: op.label,
+            })
+          : result.push({
+              value: v,
+              label: v,
+            })
+      })
 
-        option.forEach((v: string | number) => {
-          const op = state.options.get(v)
-          op
-            ? result.push({
-                value: op.value,
-                label: op.label,
-              })
-            : result.push({
-                value: v,
-                label: v,
-              })
-        })
-
-        return result
-      }
-      const op = state.options.get(option)
-      if (op) {
-        return [
-          {
-            value: op.value,
-            label: op.label,
-          },
-        ]
-      }
-      return [
-        {
-          value: option,
-          label: option,
-        },
-      ]
+      return result
     }
 
-    watch(
-      () => props.modelValue,
-      () => {
-        state.select = getOptions(props.modelValue)
-      },
-      { immediate: true, flush: 'post', deep: true }
-    )
+    watch([() => props.modelValue, () => state.options.entries()], () => {
+      state.select = getOptions(props.modelValue)
+    })
+
     useAway(SelectRef, () => {
       selectMenuVisibel.value = false
     })

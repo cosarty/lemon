@@ -36,7 +36,7 @@ export default defineComponent({
     })
 
     const selectOptionClick = () => {
-      if (!props.disabled) return
+      if (props.disabled) return
       select.handleOptionsClick(vm)
     }
     const setActive = computed(() => {

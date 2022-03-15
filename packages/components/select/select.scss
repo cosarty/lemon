@@ -57,9 +57,15 @@
     justify-content: center;
     align-items: center;
     padding: 0 6px;
-    &:hover,
-    &__active {
+    &:hover:not(.disabled),
+    &__active:not(.disabled) {
       background-color: aqua;
     }
   }
+}
+
+.disabled {
+  cursor: not-allowed;
+
+  background-color: #ccc;
 }

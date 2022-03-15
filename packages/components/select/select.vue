@@ -1,8 +1,20 @@
 <template>
-  <div class="select-content" ref="SelectRef" @click="selectClickHandel">
-    <div v-if="multiple && select.length !== 0" class="select-content-multiple">
+  <div
+    :class="[
+      'select-content',
+      {
+        disabled,
+      },
+    ]"
+    ref="SelectRef"
+    @click="selectClickHandel"
+  >
+    <div
+      v-if="multiple && select.length !== 0"
+      :class="['select-content-multiple']"
+    >
       <span v-for="(_, i) of select" :key="i"
-        >{{ _.label }} <clear-icon @click.stop="removeCheck(_.value)"
+        >{{ _.label }} <clear-icon @click.stop="removeCheck(_.value, $event)"
       /></span>
     </div>
     <input
@@ -10,7 +22,6 @@
       v-if="!multiple"
       type="text"
       :placeholder="placeholder"
-      :readonly="!isSearch"
     />
     <select-menu v-show="selectMenuVisibel && !disabled"
       ><slot></slot
@@ -55,10 +66,6 @@ export default defineComponent({
     multiple: Boolean,
     clearable: Boolean,
     disabled: Boolean,
-    isSearch: {
-      type: Boolean,
-      default: false,
-    },
   },
   emits: ['update:modelValue', 'change'],
   setup(props, ctx) {
@@ -92,7 +99,8 @@ export default defineComponent({
       }
     }
 
-    const removeCheck = (selected: any) => {
+    const removeCheck = (selected: any, e: Event) => {
+      if (props.disabled) return
       checkSelectValue(selected)
     }
 
@@ -137,7 +145,7 @@ export default defineComponent({
     useAway(SelectRef, () => {
       selectMenuVisibel.value = false
     })
-    const selectClickHandel = () => {
+    const selectClickHandel = (e: Event) => {
       selectMenuVisibel.value = !selectMenuVisibel.value
     }
 

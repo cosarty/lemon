@@ -1,8 +1,7 @@
 <template>
   <div
-    class="select-option"
     @click="selectOptionClick"
-    :class="{ 'select-option__active': setActive }"
+    :class="['select-option', { 'select-option__active': setActive, disabled }]"
   >
     {{ label }}
   </div>

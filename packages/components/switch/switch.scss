@@ -1,0 +1,101 @@
+// 按钮大小的配置
+$switch-mini-width: 28px;
+$switch-mini-height: 14px;
+$switch-small-width: 37px;
+$switch-small-height: 14px;
+
+$switch-medium-width: 37px;
+$switch-medium-height: 16px;
+$switch-large-width: 47px;
+$switch-large-height: 17.5px;
+// 颜色配置
+// --le-success-dark
+
+:root {
+  --switch-medium-width: #{$switch-medium-width};
+  --switch-medium-height: #{$switch-medium-height};
+  --switch-active-color: #{#30d158};
+  --switch-inactive-color: #{#e9e9e9};
+  // #30D158
+  // --le-success-base
+}
+
+.le {
+  &-switch {
+    display: inline-flex;
+    white-space: normal;
+    user-select: none;
+    vertical-align: middle;
+    cursor: pointer;
+    overflow: hidden;
+
+    &__medium {
+      width: var(--switch-medium-width);
+      height: var(--switch-medium-height);
+      border-radius: calc(var(--switch-medium-height) / 2);
+      --switch-toggle-diameter: calc(var(--switch-medium-height) - 4px);
+      --switch-toggle-offset: calc(
+        (var(--switch-medium-height) - var(--switch-toggle-diameter)) / 2
+      );
+      --switch-toggle-wider: var(--switch-medium-height);
+      --switch-width: var(--switch-medium-width);
+    }
+    > input[type='checkbox'] {
+      width: 0;
+      height: 0;
+      display: none;
+      opacity: 0;
+      &:active {
+        + span {
+          &::after {
+            width: var(--switch-toggle-wider);
+          }
+        }
+      }
+
+      &:checked {
+        + span {
+          background-color: var(--switch-active-color);
+        }
+        &:not(:active) {
+          + span::after {
+            transform: translateX(
+              calc(
+                var(--switch-width) - var(--switch-toggle-diameter) -
+                  var(--switch-toggle-offset)
+              )
+            );
+          }
+        }
+        + span::after {
+          transform: translateX(
+            calc(
+              var(--switch-width) - var(--switch-toggle-wider) -
+                var(--switch-toggle-offset)
+            )
+          );
+        }
+      }
+    }
+    > span {
+      width: inherit;
+      height: inherit;
+      background-color: var(--switch-inactive-color);
+      position: relative;
+      transition: 0.3s all ease-in-out;
+
+      &::after {
+        content: '';
+        display: inline-block;
+        position: absolute;
+        width: var(--switch-toggle-diameter);
+        height: var(--switch-toggle-diameter);
+        border-radius: calc(var(--switch-toggle-diameter) / 2);
+        background-color: #fff;
+        top: var(--switch-toggle-offset);
+        transform: translateX(var(--switch-toggle-offset));
+        transition: 0.3s all ease-in-out;
+      }
+    }
+  }
+}

@@ -1,6 +1,4 @@
 
-
-
 export const ratingProps = {
   modelValue: { type: Number, default: 0 },
   disabled: Boolean,
@@ -11,10 +9,6 @@ export const ratingProps = {
   showText: Boolean
 
 }
-
-
-
-
 
 export const ratingEmit = {
   change: (value: number): boolean => typeof value === 'number',

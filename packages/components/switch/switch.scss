@@ -97,5 +97,9 @@ $switch-large-height: 17.5px;
         transition: 0.3s all ease-in-out;
       }
     }
+    &__disable {
+      cursor: not-allowed;
+      background-color: var(--switch-inactive-color);
+    }
   }
 }

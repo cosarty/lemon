@@ -1,20 +1,20 @@
 import { PropType, ExtractPropTypes } from 'vue'
 
 
-export type messageType = 'waring' | 'success' | 'error' | 'info'
+export type messageType = 'waring' | 'success' | 'error' | 'info' | 'default'
 
 export const messageProps = {
   message: { type: [String, Number] },
   type: {
     type: String as PropType<messageType>,
-    default: 'info'
+    default: 'default'
   },
   duration: {
     type: Number
   },
   showClose: {
     type: Boolean,
-    default: false
+    default: true
   },
   center: {
     type: Boolean,

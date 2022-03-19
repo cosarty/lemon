@@ -10,7 +10,8 @@ export const messageProps = {
     default: 'default'
   },
   duration: {
-    type: Number
+    type: Number,
+    default: 3000
   },
   showClose: {
     type: Boolean,
@@ -21,13 +22,29 @@ export const messageProps = {
     default: false
   },
   offset: {
-    type: [Number, String],
+    type: Number,
     default: 20
   },
   id: {
     type: Number,
     require: true
+  },
+  zIndex: {
+    type: Number
+  },
+  onClose: {
+    type: Function as PropType<() => void>
   }
 }
 
+export const messageEmit = {
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  destory: () => true
+}
+
 export type MessageProps = ExtractPropTypes<typeof messageProps>
+
+export type MessageOptions = Partial<Omit<MessageProps, 'id' | 'zIndex'>>
+
+
+export type MessageEmit = typeof messageEmit

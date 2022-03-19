@@ -1,18 +1,6 @@
 <template>
   <div>
-    <!-- <le-select placeholder="请选择" v-model="value" multiple disabled>
-        <le-select-option label="苹果" value="a" disabled></le-select-option>
-        <le-select-option label="香蕉" value="b"></le-select-option>
-        <le-select-option label="葡萄" value="c" disabled></le-select-option>
-      </le-select> -->
-    <!-- <le-rating :max="6" v-model="value" @change="onChange" /> -->
-    <!-- <le-switch
-      @change="onChange"
-      v-model="value"
-      inactive-value="no"
-      inactive-color="red"
-      active-color="black"
-    /> -->
+    <button @click="handelClick">点击</button>
   </div>
 </template>
 
@@ -25,9 +13,16 @@ export default defineComponent({
     const global = useCurrentInstance()
     onMounted(() => {
       // LeMessageCall()
-
-      global.$message()
     })
+
+    const handelClick = () => {
+      global.$message({
+        message: '你好',
+      })
+    }
+    return {
+      handelClick,
+    }
   },
 })
 </script>

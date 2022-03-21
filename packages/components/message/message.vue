@@ -12,10 +12,12 @@
       @mouseleave="startTime"
       :style="setMessageOffset"
     >
-      <div><slot></slot></div>
-      <span v-if="showClose" class="le-message__close" @click="close"
-        ><message-close-icon
-      /></span>
+      <div>
+        <slot></slot>
+      </div>
+      <span v-if="showClose" class="le-message__close" @click="close">
+        <message-close-icon />
+      </span>
     </div>
   </transition>
 </template>
@@ -32,7 +34,7 @@ import './message.scss'
 export default defineComponent({
   name: createName('Message'),
   components: {
-    messageCloseIcon,
+    messageCloseIcon
   },
   props: messageProps,
   emits: messageEmit,
@@ -42,7 +44,7 @@ export default defineComponent({
 
     const setMessageOffset = computed<CSSProperties>(() => ({
       zIndex: props.zIndex,
-      top: `${props.offset}px`,
+      top: `${props.offset}px`
     }))
 
     const startTime = () => {
@@ -69,8 +71,8 @@ export default defineComponent({
       close,
       clearTimer,
       startTime,
-      setMessageOffset,
+      setMessageOffset
     }
-  },
+  }
 })
 </script>

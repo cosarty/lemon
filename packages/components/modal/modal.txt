@@ -1,0 +1,11 @@
+v-model:visible
+
+title
+content
+width
+cancel
+done
+appendTo
+disable-overlay-click
+close :取消事件 
+confirm：确认事件

@@ -17,13 +17,13 @@ export default defineComponent({
 
     const handelClick = () => {
       global.$message({
-        message: '你好',
+        message: '你好'
       })
     }
     return {
-      handelClick,
+      handelClick
     }
-  },
+  }
 })
 </script>
 

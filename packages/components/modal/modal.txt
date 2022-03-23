@@ -1,7 +1,7 @@
 v-model:visible
 
 title
-content
+
 width
 cancel
 done
@@ -9,3 +9,11 @@ appendTo
 disable-overlay-click
 close :取消事件 
 confirm：确认事件
+
+lock-scroll 滚动锁定
+destroy-on-close
+
+插槽
+footer
+cancel
+tiltle

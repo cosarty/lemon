@@ -1,5 +1,5 @@
 <template>
-  <transition
+  <Transition
     name="le-message-fade"
     @before-leave="onClose"
     @after-leave="$emit('destory')"
@@ -19,7 +19,7 @@
         <message-close-icon />
       </span>
     </div>
-  </transition>
+  </Transition>
 </template>
 
 <script lang="ts">

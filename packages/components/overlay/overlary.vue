@@ -1,6 +1,9 @@
 <template>
   <Teleport :to="to">
     <div class="le-teleport" v-show="show" v-if="isDestory">
+      <Transition :name="transition">
+        <slot></slot>
+      </Transition>
       <Transition name="le-mask-fade">
         <div
           v-show="show"
@@ -8,11 +11,6 @@
           class="le-teleport--mask"
           @click="clickHandle"
         ></div>
-      </Transition>
-      <Transition :name="transition">
-        <div :class="outerClass">
-          <slot></slot>
-        </div>
       </Transition>
     </div>
   </Teleport>
@@ -32,11 +30,6 @@ export default defineComponent({
     isOverlary: {
       type: Boolean,
       default: true
-    },
-    outerClass: {
-      type: String,
-      rquire: true,
-      default: ''
     },
     transition: {
       type: String,

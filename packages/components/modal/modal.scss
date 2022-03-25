@@ -1,0 +1,77 @@
+.le {
+  &-modal {
+    &-wrapper {
+      box-sizing: border-box;
+      padding: 10px;
+      position: fixed;
+      width: 400px;
+      min-height: 200px;
+      background-color: white;
+      z-index: 1001;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 10px;
+      &__close {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        display: inline-flex;
+        font-size: 24px;
+        svg {
+          width: 24px;
+          height: 24px;
+        }
+      }
+    }
+    &-title {
+      width: inherit;
+      word-break: normal;
+      font-size: 20px;
+      font-weight: normal;
+      position: relative;
+      min-height: 30px;
+      position: relative;
+    }
+    &-footer {
+      max-width: 100%;
+      min-width: 100%;
+      height: auto;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      &--default {
+        width: inherit;
+        height: inherit;
+        border-top: 1px solid #ccc;
+        display: flex;
+        height: 40px;
+        button {
+          outline: none;
+          border: none;
+          background-color: white;
+          flex: 1;
+          cursor: pointer;
+          + button {
+            border-left: 1px solid #ccc;
+          }
+          &:hover {
+            background-color: rgba($color: #ccc, $alpha: 0.4);
+          }
+        }
+      }
+    }
+    &-fade {
+      &-enter-active,
+      &-leave-active {
+        transition: all 0.3s ease-out;
+      }
+
+      &-enter-from,
+      &-leave-to {
+        opacity: 0;
+        top: 45%;
+      }
+    }
+  }
+}

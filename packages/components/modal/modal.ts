@@ -18,7 +18,20 @@ export const modalProps = {
     default: true
   },
   appendTo: {
-    type: String
+    type: String,
+    default: 'body'
+  },
+  showClose: {
+    type: Boolean,
+    default: false
+  },
+  destroyOnClose: {
+    type: Boolean,
+    default: false
+  },
+  closeClikOverlay: {
+    type: Boolean,
+    default: false
   }
 }
 

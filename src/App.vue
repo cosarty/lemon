@@ -1,6 +1,14 @@
 <template>
   <div>
     <button @click="handelClick">点击</button>
+    <le-modal
+      width="600px"
+      v-model="visible"
+      show-close
+      title="标题"
+      content="内容"
+    >
+    </le-modal>
   </div>
 </template>
 
@@ -14,7 +22,8 @@ export default defineComponent({
     const global = useCurrentInstance()
 
     const handelClick = () => {
-      global.$modal('')
+      visible.value = true
+      global.$modal({ content: 'gfd' })
     }
     return {
       handelClick,

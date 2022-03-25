@@ -17,16 +17,18 @@
       <span
         class="le-modal-wrapper__close"
         v-if="showClose"
-        @click="colseModal('colse')"
+        @click="closeModal('close')"
       >
         <clear-icon />
       </span>
-      <slot></slot>
+      <slot>{{ content }}</slot>
       <div class="le-modal-footer" v-if="showFooter">
         <slot name="footer">
           <modal-footer
-            @close="colseModal('colse')"
-            @confirm="colseModal('confirm')"
+            @close="closeModal('close')"
+            @confirm="closeModal('confirm')"
+            :done="done"
+            :cancel="cancel"
           />
         </slot>
       </div>
@@ -53,7 +55,7 @@ export default defineComponent({
   setup(props, { emit }) {
     const visible = ref<boolean>(props.modelValue)
 
-    const colseModal = (action: string) => {
+    const closeModal = (action: string) => {
       emit(action as keyof typeof emit)
       emit('update:modelValue', false)
     }
@@ -70,11 +72,11 @@ export default defineComponent({
       }
     )
     const modalHanelClick = () => {
-      if (props.closeClikOverlay) return
+      if (!props.maskCloseClick) return
       emit('update:modelValue', false)
     }
 
-    return { visible, modalHanelClick, colseModal, setWarpperWidth }
+    return { visible, modalHanelClick, closeModal, setWarpperWidth }
   }
 })
 </script>

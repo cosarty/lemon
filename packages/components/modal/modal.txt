@@ -1,6 +1,10 @@
 v-model:visible
 
 title
+
+
+cancel
+done
 appendTo
 close :取消事件 
 confirm：确认事件
@@ -15,4 +19,4 @@ tiltle
 
 
 width
-close-clik-overlay
+disable-overlay-click

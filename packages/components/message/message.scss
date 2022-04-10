@@ -1,25 +1,4 @@
-$message-type: (
-  'waring': (
-    'bg': white,
-    'color': black,
-  ),
-  'success': (
-    'bg': rgb(36, 33, 233),
-    'color': rgb(30, 107, 180),
-  ),
-  'error': (
-    'bg': rgb(241, 16, 16),
-    'color': rgb(185, 34, 34),
-  ),
-  'info': (
-    'bg': rgb(187, 172, 40),
-    'color': rgb(203, 224, 12),
-  ),
-  'default': (
-    'bg': white,
-    'color': black,
-  ),
-);
+@use  './var.scss' as *;
 
 .le {
   &-message {

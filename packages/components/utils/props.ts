@@ -3,12 +3,10 @@ import { PropType } from 'vue'
 
 export const numericType = [Number, String]
 
-export const turthProps = {
+export const turthProps = (defaultVal: boolean) => ({
   type: Boolean,
-  default: true as const
-
-}
-
+  default: defaultVal
+})
 
 export const unknowProps = {
   type: null as unknown as PropType<unknown>

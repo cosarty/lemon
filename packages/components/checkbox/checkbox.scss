@@ -1,0 +1,32 @@
+@use './var.scss' as *;
+
+.le-checkbox{
+  display: inline-flex;
+  overflow: hidden;
+  cursor: pointer;
+  user-select: none;
+  font-size: 16px;
+  justify-content: center;
+  align-items: center;
+  input{
+    width: 0;
+    height: 0;
+    opacity: 0;
+    overflow: hidden;
+    display: none;
+    text-indent: -99999px;
+  }
+  &--disabled {
+    cursor: not-allowed;
+    color: var(--le-accents-5);
+  }
+
+  &__icon{
+    width: 1.2em;
+    height: 1.2em;
+    vertical-align: top;
+  &--disabled{
+    fill: var(--le-accents-5);
+  }
+  }
+}

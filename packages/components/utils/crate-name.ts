@@ -37,7 +37,8 @@ function genBem(name: string, mods?: Mods): string {
  * b(['disabled', 'primary']) // 'button button--disabled button--primary'
  */
 export const createBEM = (name: string) => {
-  name = namespace + '-' + name
+
+  name = (namespace + '-' + name).replace(/[A-Z]/g, (match) => match.toLowerCase());
   return (el?: Mods, mods?: Mods): Mods => {
     if (el && typeof el !== 'string') {
       mods = el;

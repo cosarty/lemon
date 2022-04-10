@@ -29,9 +29,13 @@ export default defineComponent({
       emit('change', prenValue.value)
     }
 
-    watch(prenValue, (pre) => {
-      emit('update:modelValue', pre)
-    })
+    watch(
+      prenValue,
+      (pre) => {
+        emit('update:modelValue', pre)
+      },
+      { deep: true }
+    )
 
     provide(checkBoxGroupKey, { setPrentValue, props })
 

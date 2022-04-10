@@ -17,12 +17,12 @@
 import { defineComponent, ref } from 'vue'
 import RatingIcon from './rating-icon.vue'
 import { ratingEmit, ratingProps } from './rating'
-import { createName } from '../../utils'
+import { createName } from '../utils'
 import './rating.scss'
 export default defineComponent({
   name: createName('Rating'),
   components: {
-    RatingIcon,
+    RatingIcon
   },
   props: ratingProps,
   emits: ratingEmit,
@@ -53,9 +53,9 @@ export default defineComponent({
       setCurrentValue,
       resetCurrentValue,
       activItem,
-      selectValue,
+      selectValue
     }
-  },
+  }
 })
 </script>
 

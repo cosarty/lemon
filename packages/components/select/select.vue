@@ -33,7 +33,7 @@
 import { defineComponent, provide, ref, watch, reactive, toRefs } from 'vue'
 
 import { useAway } from '../../hooks'
-import { createName } from '../../utils'
+import { createName } from '../utils'
 import { SelectOptionProxy } from './inteface'
 import SelectMenu from './select-menu.vue'
 import ClearIcon from './clear-icon.vue'

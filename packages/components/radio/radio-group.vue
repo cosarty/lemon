@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import { defineComponent, provide, ref, watch } from 'vue'
-import { createName } from '../../utils'
+import { createName } from '../utils'
 import { radioGroupProps, radioEmit, radioGroupKey } from './radio'
 import './radio.scss'
 export default defineComponent({

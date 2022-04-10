@@ -1,7 +1,7 @@
 import components from './components'
 
 
-import { makeInstall } from './utils/make-install'
+import { makeInstall } from './components/utils/make-install'
 
 
 

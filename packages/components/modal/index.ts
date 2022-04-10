@@ -1,4 +1,4 @@
-import { withInstall, withInstallFuction } from '../../utils'
+import { withInstall, withInstallFuction } from '../utils'
 import Modal from './modal.vue'
 import modalCall from './modal-call'
 

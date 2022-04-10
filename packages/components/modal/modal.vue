@@ -38,7 +38,7 @@
 
 <script lang="ts">
 import { defineComponent, ref, watch, computed } from 'vue'
-import { createName } from '../../utils'
+import { createName } from '../utils'
 import { modalProps, modalEmit } from './modal'
 import modalFooter from './modal-footer.vue'
 import clearIcon from './clear-icon.vue'

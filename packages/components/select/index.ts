@@ -1,4 +1,4 @@
-import { withInstall } from '../../utils'
+import { withInstall } from '../utils'
 import Select from './select.vue'
 import SelectOption from './select-option.vue'
 

@@ -13,7 +13,7 @@
 
 <script>
 import { ref, computed, watchEffect, inject } from 'vue'
-import { createName } from '../../utils'
+import { createName } from '../utils'
 import { radioProps, radioEmit, radioGroupKey } from './radio'
 import './radio.scss'
 export default {

@@ -26,7 +26,7 @@
 import { computed, defineComponent, onMounted, ref } from 'vue'
 import type { CSSProperties } from 'vue'
 import { useTimeOut } from '../../hooks'
-import { createName } from '../../utils'
+import { createName } from '../utils'
 import messageCloseIcon from './message-close-icon.vue'
 import { messageProps, messageEmit } from './message'
 import './message.scss'

@@ -18,7 +18,7 @@
 
 <script lang="ts">
 import { defineComponent, computed } from 'vue'
-import { createName } from '../../utils'
+import { createName } from '../utils'
 import './overlary.scss'
 export default defineComponent({
   name: createName('Overlary'),

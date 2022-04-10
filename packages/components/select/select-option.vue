@@ -13,16 +13,16 @@ import {
   inject,
   computed,
   getCurrentInstance,
-  onBeforeUnmount,
+  onBeforeUnmount
 } from 'vue'
 import { SelectOptionProxy } from './inteface'
-import { createName } from '../../utils'
+import { createName } from '../utils'
 export default defineComponent({
   name: createName('SelectOption'),
   props: {
     value: [String, Object, Number],
     label: String,
-    disabled: Boolean,
+    disabled: Boolean
   },
   setup(props) {
     const select = inject<any>('select')
@@ -51,7 +51,7 @@ export default defineComponent({
     })
 
     return { selectOptionClick, setActive }
-  },
+  }
 })
 </script>
 

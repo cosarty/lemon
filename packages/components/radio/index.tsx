@@ -1,4 +1,4 @@
-import { withInstall } from '../../utils'
+import { withInstall } from '../utils'
 import Radio from './radio.vue'
 import RadioGroup from './radio-group.vue'
 

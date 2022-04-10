@@ -1,4 +1,4 @@
-import { PropType } from 'vue'
+import { } from '../utils'
 
 
 const checkboxProps = {

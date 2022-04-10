@@ -3,8 +3,8 @@
     :class="[
       'select-content',
       {
-        disabled,
-      },
+        disabled
+      }
     ]"
     ref="SelectRef"
     @click="selectClickHandel"
@@ -47,25 +47,25 @@ interface SelectType {
 
 const defaultSelect: SelectType = {
   label: '',
-  value: '',
+  value: ''
 } as SelectType
 
 export default defineComponent({
   name: createName('Select'),
   components: {
     SelectMenu,
-    ClearIcon,
+    ClearIcon
   },
   props: {
     // 完成 multiple disabled
     modelValue: {
       type: [String, Array, Number],
-      default: undefined,
+      default: undefined
     },
     placeholder: { type: String, default: '' },
     multiple: Boolean,
     clearable: Boolean,
-    disabled: Boolean,
+    disabled: Boolean
   },
   emits: ['update:modelValue', 'change'],
   setup(props, ctx) {
@@ -75,7 +75,7 @@ export default defineComponent({
       select: SelectType[]
     }>({
       options: new Map(),
-      select: [defaultSelect],
+      select: [defaultSelect]
     })
     const SelectRef = ref<Element | undefined>(undefined)
 
@@ -127,11 +127,11 @@ export default defineComponent({
         op
           ? result.push({
               value: op.value,
-              label: op.label,
+              label: op.label
             })
           : result.push({
               value: v,
-              label: v,
+              label: v
             })
       })
 
@@ -154,16 +154,16 @@ export default defineComponent({
       handleOptionsClick,
       destoryOption,
       ...toRefs(state),
-      multiple: props.multiple,
+      multiple: props.multiple
     })
     return {
       ...toRefs(state),
       SelectRef,
       selectMenuVisibel,
       removeCheck,
-      selectClickHandel,
+      selectClickHandel
     }
-  },
+  }
 })
 </script>
 

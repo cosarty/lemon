@@ -5,8 +5,10 @@ $select-option-item-default-height:30px;
 }
 
 .le-select-option{
-  width: auto;
+  // width: auto;
+ 
   &__item{
+    flex: 0 0 auto;
     line-height: var(--select-option-item-default-height);
     background-color: var(--le-accents-2);
     box-sizing: border-box;

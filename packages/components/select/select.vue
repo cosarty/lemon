@@ -1,10 +1,14 @@
 <template>
-  <div :class="bem('wrapper')" ref="prentRef" @click.stop="selectClickHandle">
+  <div
+    :class="bem('wrapper', { active: dropdownVisible })"
+    ref="prentRef"
+    @click.stop="selectClickHandle"
+  >
     <div :class="bem('content')">
-      <div :class="bem('input')">
-        <input type="text" readonly value="dsa" />
+      <div :class="bem('input')" v-if="false">
+        <input type="text" readonly :value="'你好'" />
       </div>
-      <div :class="bem('multiple')">fddsf</div>
+      <div v-else :class="bem('multiple')">fddsf，fdsfdsf dsadsad</div>
     </div>
 
     <div :class="bem('icon')">
@@ -12,8 +16,9 @@
     </div>
   </div>
   <select-dropdown
+    :prent-ref="prentRef"
     :width="dropdownWidth"
-    :visible="dropdownVisible"
+    v-model:visible="dropdownVisible"
     ref="selectDropdownRef"
     ><slot></slot
   ></select-dropdown>
@@ -23,7 +28,6 @@
 import { defineComponent, nextTick, ref } from 'vue'
 
 import { createName, createBEM, useRect } from '../utils'
-import { useAway } from '../../hooks'
 import arrowIcon from './arrow-icon.vue'
 import selectDropdown from './select-dropdown.vue'
 
@@ -51,17 +55,14 @@ export default defineComponent({
     }
 
     const updateDropdownStatus = async () => {
-      await nextTick()
-      if (prentRef.value) {
-        const { width } = useRect(prentRef.value)
+      nextTick(() => {
+        if (prentRef.value) {
+          const { width } = useRect(prentRef.value)
 
-        dropdownWidth.value = width
-      }
+          dropdownWidth.value = width
+        }
+      })
     }
-
-    useAway(selectDropdownRef, () => {
-      dropdownVisible.value = false
-    })
 
     return {
       bem,

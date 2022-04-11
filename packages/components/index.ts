@@ -1,4 +1,5 @@
-import { LeSelect, LeSelectOption } from './select'
+import { LeSelect } from './select'
+import { LeSelectOption } from './select-option'
 import { LeRating } from './rating'
 import { LeSwitch } from './switch'
 import { LeMessageCall } from './message'

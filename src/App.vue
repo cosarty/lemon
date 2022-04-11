@@ -1,9 +1,10 @@
 <template>
   <div>
-    <le-check-box-group @change="boxChange" v-model="checked">
-      <le-check-box :value="['a']">选中</le-check-box>
-      <le-check-box :value="2">你好</le-check-box>
-    </le-check-box-group>
+    <le-select>
+      <le-select-option>1</le-select-option>
+      <le-select-option>2</le-select-option>
+      <le-select-option>3</le-select-option>
+    </le-select>
   </div>
 </template>
 

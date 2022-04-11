@@ -1,9 +1,6 @@
 <template>
-  <div
-    @click="selectOptionClick"
-    :class="['select-option', { 'select-option__active': setActive, disabled }]"
-  >
-    {{ label }}
+  <div>
+    <slot></slot>
   </div>
 </template>
 
@@ -19,11 +16,7 @@ import { SelectOptionProxy } from './inteface'
 import { createName } from '../utils'
 export default defineComponent({
   name: createName('SelectOption'),
-  props: {
-    value: [String, Object, Number],
-    label: String,
-    disabled: Boolean
-  },
+
   setup(props) {
     const select = inject<any>('select')
 
@@ -41,7 +34,7 @@ export default defineComponent({
     const setActive = computed(() => {
       const { value } = props
 
-      if (Array.isArray(select.select.value)) {
+      if (Array.isArray(select.select.value) && props.value) {
         return (
           select.select.value.findIndex((v: any) => v.value === value) !== -1
         )

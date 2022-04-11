@@ -1,16 +1,21 @@
 <template>
-  <div class="select-content-menu"><slot></slot></div>
+  <div>
+    <slot></slot>
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 
+import { createName } from '../utils'
 export default defineComponent({
-  setup() {
+  name: createName('SelectOption'),
+
+  setup(props) {
     return {}
-  },
+  }
 })
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 </style>

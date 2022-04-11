@@ -20,7 +20,9 @@ const defaultAwayOption: AwayOption = {
  */
 const useAway = (el: EvTarget, lisitener: EventListener, option: AwayOption = defaultAwayOption): void => {
   const onClick = (evt: Event) => {
+
     const element = unref(el)
+
     if (element && !element.contains(evt.target as Node)) {
       lisitener(evt)
     }

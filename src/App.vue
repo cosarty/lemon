@@ -1,8 +1,12 @@
 <template>
-  <div>
+  <div class="box">
     <le-select>
-      <le-select-option>1</le-select-option>
+      <le-select-option>d</le-select-option>
       <le-select-option>2</le-select-option>
+      <le-select-option>3</le-select-option>
+      <le-select-option>3</le-select-option>
+      <le-select-option>3</le-select-option>
+      <le-select-option>3</le-select-option>
       <le-select-option>3</le-select-option>
     </le-select>
   </div>
@@ -27,4 +31,7 @@ export default defineComponent({
 
 
 <style lang="scss">
+.box {
+  text-align: center;
+}
 </style>

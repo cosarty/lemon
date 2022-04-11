@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="bem('item')">
     <slot></slot>
   </div>
 </template>
@@ -7,12 +7,14 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 
-import { createName } from '../utils'
+import { createName, createBEM } from '../utils'
+import './select-option.scss'
 export default defineComponent({
   name: createName('SelectOption'),
 
   setup(props) {
-    return {}
+    const bem = createBEM('select-option')
+    return { bem }
   }
 })
 </script>

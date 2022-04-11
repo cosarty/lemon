@@ -34,3 +34,12 @@ export const isIOS = (): boolean =>
 
 
 export const hasOwn = <T>(source: T, key: string) => Object.hasOwnProperty.call(source, key)
+
+
+export const addUnit = (value: string | number, unit = 'px'): string => {
+  if (isNumeric(value)) return `${value}${unit}`
+  if (typeof value === 'string') return value
+  return ''
+
+
+}

@@ -1,0 +1,23 @@
+$select-option-item-default-height:30px;
+
+:root{
+--select-option-item-default-height:#{$select-option-item-default-height};
+}
+
+.le-select-option{
+  width: auto;
+  &__item{
+    line-height: var(--select-option-item-default-height);
+    background-color: var(--le-accents-2);
+    box-sizing: border-box;
+    word-break: normal;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    padding-left: 4px;
+    user-select: none;
+    cursor: pointer;
+    &:not(:first-child){
+      margin-top: 2px;
+    }
+  }
+}

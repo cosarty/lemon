@@ -1,4 +1,4 @@
-import { unref } from 'vue'
+import { unref, CreateComponentPublicInstance, nextTick } from 'vue'
 import type { Ref } from 'vue'
 import { userEventListener } from '../userEventListener'
 
@@ -19,9 +19,13 @@ const defaultAwayOption: AwayOption = {
  * @param option  选项
  */
 const useAway = (el: EvTarget, lisitener: EventListener, option: AwayOption = defaultAwayOption): void => {
-  const onClick = (evt: Event) => {
 
-    const element = unref(el)
+  const onClick = async (evt: Event) => {
+    await nextTick()
+    let element = unref(el);
+
+
+    ('$el' in element!) && (element = (element as unknown as CreateComponentPublicInstance).$el)
 
     if (element && !element.contains(evt.target as Node)) {
       lisitener(evt)

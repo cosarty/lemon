@@ -5,7 +5,7 @@
     @click.stop="selectClickHandle"
   >
     <div :class="bem('content')">
-      <div :class="bem('input')" v-if="false">
+      <div :class="bem('input')" v-if="true">
         <input type="text" readonly :value="'你好'" />
       </div>
       <div v-else :class="bem('multiple')">fddsf，fdsfdsf dsadsad</div>

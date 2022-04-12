@@ -40,7 +40,7 @@ export default defineComponent({
     const setPosition = () => {
       const { height: dropDownHeight } = useRect(dropdownRef!)
       const { bottom, left, height: prenHeight } = useRect(props.prentRef!)
-      const istop = height.value - bottom > dropDownHeight
+      const istop = height.value - bottom - 10 > dropDownHeight
       const opsitionType = istop ? 'bottom' : 'top'
       isPosition.value = opsitionType
       const addTop = istop ? 0 : prenHeight + dropDownHeight + 20

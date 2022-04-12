@@ -9,6 +9,7 @@ $select-default-font-size: 17px;
 }
 
 .le-select {
+  user-select: none;
   &__wrapper {
    
     text-align: left;
@@ -32,6 +33,7 @@ $select-default-font-size: 17px;
     max-width: calc(var(--select-default-width));
     line-height: var(--select-default-height);
     padding-left: 2px;
+    user-select: none;
   
   }
 
@@ -42,20 +44,21 @@ $select-default-font-size: 17px;
     margin-right: 2px;
   }
   &__input {
+
     > input {
       box-sizing: border-box;
       padding: 0;
       border: none;
       outline: none;
       cursor: pointer;
-      user-select: none;
+
       font-size: var(--select-default-font-size);
       max-width: calc(var(--select-default-width));
     }
   }
 
   &__multiple{
-    user-select: none;
+
     min-width: calc(var(--select-default-width));
   }
 
@@ -100,8 +103,10 @@ $select-default-font-size: 17px;
     }
 
     &--top{
+      flex-direction: column-reverse;
       &::after{
         display: block;
+
       }
     }
 

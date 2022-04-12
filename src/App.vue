@@ -1,16 +1,14 @@
 <template>
-  <div class="box">
-    <div>
-      <le-select>
-        <le-select-option>d</le-select-option>
-        <le-select-option>2</le-select-option>
-        <le-select-option>3</le-select-option>
-        <le-select-option>3</le-select-option>
-        <le-select-option>3</le-select-option>
-        <le-select-option>3</le-select-option>
-        <le-select-option>3</le-select-option>
-      </le-select>
-    </div>
+  <div>
+    <le-select>
+      <le-select-option>d</le-select-option>
+      <le-select-option>2</le-select-option>
+      <le-select-option>3</le-select-option>
+      <le-select-option>3</le-select-option>
+      <le-select-option>3</le-select-option>
+      <le-select-option>3</le-select-option>
+      <le-select-option>3</le-select-option>
+    </le-select>
   </div>
 </template>
 
@@ -34,14 +32,9 @@ export default defineComponent({
 
 <style lang="scss">
 .box {
-  position: relative;
-  height: 1000px;
-  width: 3000px;
-}
-
-.box > div {
-  position: absolute;
-  top: 600px;
-  left: 2000px;
+  width: 6000px;
+  height: 7000px;
+  text-align: center;
+  margin-top: 2000px;
 }
 </style>

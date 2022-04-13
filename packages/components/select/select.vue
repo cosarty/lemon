@@ -83,7 +83,9 @@ export default defineComponent({
     const prentValue = ref<any[] | any>(props.modelValue)
 
     const checkedLable = computed(() =>
-      setdepend.value.filter((i) => prentValue.value.includes(i.value))
+      setdepend.value.filter(
+        (i) => prentValue.value == i || prentValue.value.includes(i.value)
+      )
     )
 
     const selectClickHandle = () => {

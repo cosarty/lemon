@@ -23,5 +23,10 @@ $select-option-item-default-height:30px;
     &--checked{
       background-color: var(--le-accents-2);
     }
+    &--disabled{
+      cursor: not-allowed;
+      background-color: var(--le-accents-1);
+      color:var(--le-accents-4) ;
+    }
   }
 }

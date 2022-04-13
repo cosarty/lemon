@@ -1,5 +1,8 @@
 <template>
-  <div :class="bem('item', { checked: checked })" @click="updateValue">
+  <div
+    :class="bem('item', { checked: checked, disabled: disabled })"
+    @click="updateValue"
+  >
     <slot></slot>
   </div>
 </template>
@@ -43,8 +46,10 @@ export default defineComponent({
       getlable.value &&
       prent!.updateDepends({ lable: getlable.value!, value: props.value })
 
-    const updateValue = () =>
+    const updateValue = () => {
+      if (props.disabled) return
       props.value && prent!.updatePrentValue(props.value)
+    }
 
     onMounted(() => {
       updateprentDependens()

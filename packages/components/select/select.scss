@@ -23,7 +23,11 @@ $select-default-font-size: 17px;
 
     &--disabled {
       cursor: not-allowed;
-      background-color: var(--le-accents-3);
+      background-color: var(--le-accents-1);
+      input{
+        color:var(--le-accents-4) ;
+        cursor: not-allowed !important;
+      }
     }
     &--active{
       box-shadow: 0 0 1px 1px inset var(--le-success-light);
@@ -58,15 +62,23 @@ $select-default-font-size: 17px;
       padding-left: 6px;
       font-size: var(--select-default-font-size);
       max-width: calc(var(--select-default-width));
+      background-color: transparent;
+      
     }
   }
 
   &__multiple{
     min-height: var(--select-default-height);
     width: calc(var(--select-default-width));
+    overflow: hidden;
     box-sizing: border-box;
     padding-top: 5px;
     padding-left: 5px;
+    >div{
+     height:calc(var(--select-default-height) - 10px) ;
+     line-height: 1.7em;
+     color:var(--le-accents-3) ;
+    }
 
   
     &__item{

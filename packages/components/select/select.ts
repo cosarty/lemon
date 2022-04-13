@@ -20,7 +20,7 @@ export const selectProps = {
   modelValue: unknowProps,
   multiple: turthProps(false),
   clearable: turthProps(false),
-  width: NumericProps(140),
+  width: NumericProps(160),
   placeholder: StringProps('请输入'),
   disabled: turthProps(false)
 }

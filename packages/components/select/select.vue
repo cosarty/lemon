@@ -1,20 +1,29 @@
 <template>
   <div
-    :class="bem('wrapper', { active: dropdownVisible })"
+    :class="bem('wrapper', { active: dropdownVisible, disabled: disabled })"
+    :style="{ '--select-default-width': addUnit(width) }"
     ref="prentRef"
     @click.stop="selectClickHandle"
   >
     <div :class="bem('content')">
       <div :class="bem('input')" v-if="!multiple">
-        <input type="text" readonly :value="prentValue" />
+        <input
+          type="text"
+          readonly
+          :value="checkedLable[0].value"
+          :placeholder="placeholder"
+        />
       </div>
       <div v-else :class="bem('multiple')">
+        <div v-if="!checkedLable || checkedLable.length === 0">
+          {{ placeholder }}
+        </div>
         <span
           :class="bem('multiple__item')"
-          v-for="(item, index) in prentValue"
+          v-for="(item, index) in checkedLable"
           :key="index"
-          @click.stop="clearItem(item)"
-          >{{ item }}<clear-icon v-if="clearable"
+          @click.stop="clearItem(item.value)"
+          >{{ item.lable }}<clear-icon v-if="clearable"
         /></span>
       </div>
     </div>
@@ -33,8 +42,16 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, nextTick, ref, provide, watch, readonly } from 'vue'
-import { createName, createBEM, useRect } from '../utils'
+import {
+  defineComponent,
+  nextTick,
+  ref,
+  provide,
+  watch,
+  computed,
+  CSSProperties
+} from 'vue'
+import { createName, createBEM, useRect, addUnit } from '../utils'
 import arrowIcon from './arrow-icon.vue'
 import clearIcon from './clear-icon.vue'
 import selectDropdown from './select-dropdown.vue'
@@ -65,7 +82,12 @@ export default defineComponent({
     const setdepend = ref<dependType[]>([])
     const prentValue = ref<any[] | any>(props.modelValue)
 
+    const checkedLable = computed(() =>
+      setdepend.value.filter((i) => prentValue.value.includes(i.value))
+    )
+
     const selectClickHandle = () => {
+      if (props.disabled) return
       updateDropdownStatus()
 
       dropdownVisible.value = !dropdownVisible.value
@@ -95,6 +117,8 @@ export default defineComponent({
       } else {
         prentValue.value = value
       }
+
+      emit('change', value)
     }
 
     const updateDepends = (value: dependType) => {
@@ -107,11 +131,30 @@ export default defineComponent({
       }
     }
 
-    const clearItem = (value: unknown) => updatePrentValue(value)
+    const clearItem = (value: unknown) => {
+      if (props.disabled) return
+      updatePrentValue(value)
+    }
+
+    watch(
+      () => props.modelValue,
+      (cur) => {
+        if (props.multiple) {
+          if (Array.isArray(cur)) {
+            prentValue.value = props.modelValue
+          } else {
+            prentValue.value = [props.modelValue]
+          }
+        }
+      },
+      {
+        immediate: true
+      }
+    )
+
     watch(prentValue, (cur) => {
       ;(selectDropdownRef.value as any).setPosition()
       emit('update:modelValue', cur)
-      emit('change', cur)
     })
 
     provide(selectKey, {
@@ -128,7 +171,9 @@ export default defineComponent({
       dropdownWidth,
       selectDropdownRef,
       prentValue,
-      clearItem
+      clearItem,
+      checkedLable,
+      addUnit
     }
   }
 })

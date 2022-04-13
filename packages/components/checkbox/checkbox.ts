@@ -1,11 +1,12 @@
-import { turthProps, unknowProps } from '../utils'
+import { StringProps, turthProps, unknowProps } from '../utils'
 
 
 export const checkboxProps = {
   modelValue: turthProps(false),
   value: unknowProps,
   disabled: turthProps(false),
-  bindGroup: turthProps(true)
+  bindGroup: turthProps(true),
+  lable: StringProps<string | null>(null)
 }
 
 

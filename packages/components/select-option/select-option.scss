@@ -9,8 +9,7 @@ $select-option-item-default-height:30px;
  
   &__item{
     flex: 0 0 auto;
-    line-height: var(--select-option-item-default-height);
-    background-color: var(--le-accents-2);
+    line-height: var(--select-option-item-default-height); 
     box-sizing: border-box;
     word-break: normal;
     text-overflow: ellipsis;
@@ -20,6 +19,9 @@ $select-option-item-default-height:30px;
     cursor: pointer;
     &:not(:first-child){
       margin-top: 2px;
+    }
+    &--checked{
+      background-color: var(--le-accents-2);
     }
   }
 }

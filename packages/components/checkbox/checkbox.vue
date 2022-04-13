@@ -10,7 +10,9 @@
       @change="checkBoxHandle()"
       :disabled="disabled"
     />
-    <span><slot></slot></span>
+    <span
+      ><slot>{{ lable }}</slot></span
+    >
   </label>
 </template>
 
@@ -23,7 +25,7 @@ import checkboxIcon from './checkbox-icon.vue'
 import './checkbox.scss'
 
 export default defineComponent({
-  name: createName('CheckBox'),
+  name: createName('Checkbox'),
   components: {
     checkboxIcon
   },

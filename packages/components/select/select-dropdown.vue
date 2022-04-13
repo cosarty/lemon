@@ -5,7 +5,7 @@
       ref="dropdownRef"
       :class="bem('dropdown', [isPosition])"
       :style="dropdownStyle"
-      v-if="visible"
+      v-show="visible"
     >
       <div :class="bem('dropdown__wrapper')">
         <slot></slot>
@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref, watch, CSSProperties } from 'vue'
+import { computed, defineComponent, ref, CSSProperties } from 'vue'
 import { createBEM, addUnit, useRect } from '../utils'
 import { useAway, useWindowChange } from '../../hooks'
 import { selectDropDownProps, selectDropDownEmit } from './select'
@@ -24,7 +24,7 @@ import './select.scss'
 export default defineComponent({
   props: selectDropDownProps,
   emits: selectDropDownEmit,
-  setup(props, { emit }) {
+  setup(props, { emit, expose }) {
     const bem = createBEM('Select')
     const isPosition = ref<'bottom' | 'top'>('bottom')
 
@@ -39,6 +39,7 @@ export default defineComponent({
 
     const setPosition = () => {
       const { height: dropDownHeight } = useRect(dropdownRef!)
+
       const { bottom, left, height: prenHeight } = useRect(props.prentRef!)
       const istop = height.value - bottom - 10 > dropDownHeight
       const opsitionType = istop ? 'bottom' : 'top'
@@ -49,6 +50,10 @@ export default defineComponent({
         top: addUnit(scrollY.value + bottom - addTop)
       }
     }
+
+    expose({
+      setPosition
+    })
 
     useAway(dropdownRef, () => {
       emit('update:visible', false)

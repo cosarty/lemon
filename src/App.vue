@@ -1,13 +1,14 @@
 <template>
   <div>
-    <le-select>
-      <le-select-option>d</le-select-option>
-      <le-select-option>2</le-select-option>
-      <le-select-option>3</le-select-option>
-      <le-select-option>3</le-select-option>
-      <le-select-option>3</le-select-option>
-      <le-select-option>3</le-select-option>
-      <le-select-option>3</le-select-option>
+    <le-select v-model="checked" multiple clearable>
+      <le-select-option :value="1">1</le-select-option>
+      <le-select-option :value="3">2</le-select-option>
+      <le-select-option :value="4">kgfl;fjkljh</le-select-option>
+      <le-select-option :value="438279">kgkls</le-select-option>
+      <le-select-option value="543">fdjklj</le-select-option>
+      <le-select-option value="87">gjfkdl</le-select-option>
+      <le-select-option value="gjfkdl">gfjdl</le-select-option>
+      <le-select-option value="kgkls">riep</le-select-option>
     </le-select>
   </div>
 </template>
@@ -20,11 +21,11 @@ export default defineComponent({
   setup() {
     const checked = ref()
 
-    const boxChange = (v: any) => {
-      console.log(v)
-    }
+    watch(checked, (cc) => {
+      console.log(checked.value)
+    })
 
-    return { checked, boxChange }
+    return { checked }
   }
 })
 </script>

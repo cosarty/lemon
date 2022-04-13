@@ -12,7 +12,7 @@ import {
   checkboxGroupEmit
 } from './checkbox-group'
 export default defineComponent({
-  name: createName('CheckBoxGroup'),
+  name: createName('CheckboxGroup'),
   props: checkboxGroupProps,
   emits: checkboxGroupEmit,
   setup(props, { emit }) {
@@ -25,14 +25,13 @@ export default defineComponent({
       } else {
         prenValue.value.push(value)
       }
-
-      emit('change', prenValue.value)
     }
 
     watch(
       prenValue,
       (pre) => {
-        emit('update:modelValue', pre)
+        emit('update:modelValue', prenValue.value)
+        emit('change', prenValue.value)
       },
       { deep: true }
     )

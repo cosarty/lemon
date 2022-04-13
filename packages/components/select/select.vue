@@ -35,7 +35,6 @@
 <script lang="ts">
 import { defineComponent, nextTick, ref, provide, watch, readonly } from 'vue'
 import { createName, createBEM, useRect } from '../utils'
-import { useAway } from '../../hooks'
 import arrowIcon from './arrow-icon.vue'
 import clearIcon from './clear-icon.vue'
 import selectDropdown from './select-dropdown.vue'
@@ -110,7 +109,7 @@ export default defineComponent({
 
     const clearItem = (value: unknown) => updatePrentValue(value)
     watch(prentValue, (cur) => {
-      // ;(selectDropdownRef.value as any).setPosition()
+      ;(selectDropdownRef.value as any).setPosition()
       emit('update:modelValue', cur)
       emit('change', cur)
     })

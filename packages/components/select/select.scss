@@ -55,6 +55,7 @@ $select-default-font-size: 17px;
       outline: none;
       cursor: pointer;
       height: 100%;
+      padding-left: 6px;
       font-size: var(--select-default-font-size);
       max-width: calc(var(--select-default-width));
     }

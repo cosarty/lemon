@@ -8,9 +8,11 @@ import { LeOverlary } from './overlay'
 import { LeRadio, LeRadioGroup } from './radio'
 import { LeCheckBox } from './checkbox'
 import { LeCheckBoxGroup } from './checkbox-group'
+import { LeTabs } from './tabs'
+import { LeTab } from './tab'
 
 
 
 export { LeMessageCall }
-export default [LeSelect, LeSelectOption, LeRating, LeSwitch, LeMessageCall, LeModal, LeOverlary, LeModalCall, LeRadio, LeRadioGroup, LeCheckBox, LeCheckBoxGroup]
+export default [LeSelect, LeSelectOption, LeRating, LeSwitch, LeMessageCall, LeModal, LeOverlary, LeModalCall, LeRadio, LeRadioGroup, LeCheckBox, LeCheckBoxGroup, LeTabs, LeTab]
 

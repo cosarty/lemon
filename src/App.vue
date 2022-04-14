@@ -1,22 +1,8 @@
 <template>
   <div>
-    <le-select
-      v-model="checked"
-      clearable
-      multiple
-      placeholder="hhhh"
-      @change="handleChange"
-      width="300"
-    >
-      <le-select-option :value="1">1</le-select-option>
-      <le-select-option :value="3">2</le-select-option>
-      <le-select-option :value="4">kgfl;fjkljh</le-select-option>
-      <le-select-option :value="438279" disabled>kgkls</le-select-option>
-      <le-select-option value="543">fdjklj</le-select-option>
-      <le-select-option value="87">gjfkdl</le-select-option>
-      <le-select-option value="gjfkdl">gfjdl</le-select-option>
-      <le-select-option value="kgkls">riep</le-select-option>
-    </le-select>
+    <le-tabs>
+      <le-tab></le-tab>
+    </le-tabs>
   </div>
 </template>
 

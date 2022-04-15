@@ -1,9 +1,9 @@
 <template>
-  <div>
-    <le-tabs>
-      <le-tab></le-tab>
-    </le-tabs>
-  </div>
+  <le-tabs v-model:active="checked" animation="sliding">
+    <le-tab title="nihao" name="hg">我是1</le-tab>
+    <le-tab name="b" title="nihhao" disabled="">我是2</le-tab>
+    <le-tab title="nih2">我是3</le-tab>
+  </le-tabs>
 </template>
 
 <script lang="ts">
@@ -12,9 +12,9 @@ import { defineComponent, ref, watch } from 'vue'
 // import { useCurrentInstance } from '../packages/hooks'
 export default defineComponent({
   setup() {
-    const checked = ref('543')
+    const checked = ref()
 
-    watch(checked, (cc) => {
+    watch(checked, () => {
       console.log(checked.value)
     })
 
@@ -29,10 +29,4 @@ export default defineComponent({
 
 
 <style lang="scss">
-.box {
-  width: 6000px;
-  height: 7000px;
-  text-align: center;
-  margin-top: 2000px;
-}
 </style>

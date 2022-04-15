@@ -1,26 +1,23 @@
 import { StringProps, NumericProps, turthProps } from '../utils'
+import { InjectionKey, Ref, ExtractPropTypes } from 'vue'
 
-export type placement = 'top' | 'bottom' | 'left' | 'right'
+export type placement = 'top' | 'left' | 'right'
 
-export type tabsType = "card" | "line"
 
-export type positionTYpe = 'left' | 'right' | 'center'
+export type positionType = 'left' | 'right' | 'center'
 
 export type animationType = 'fading' | 'sliding'
 
 export const tabsProps = {
   active: NumericProps(0),
-  placement: StringProps<placement>('top'),
   activeColor: StringProps("#409EFF"),
-  type: StringProps('card'),
-  border: turthProps(false),
-  tabGutter: NumericProps(0),
-  tabPostision: StringProps<positionTYpe>('left'),
-  animation: StringProps<animationType>('sliding')
+  border: turthProps(true),
+  tabPostision: StringProps<positionType>('left'),
+  animation: StringProps<animationType>('fading')
 }
 export const tabProps = {
-  key: NumericProps(null),
-  title: StringProps(null),
+  name: NumericProps(undefined),
+  title: StringProps(undefined),
   disabled: turthProps(false)
 }
 
@@ -29,7 +26,24 @@ export type keyType = string | number
 export const checkKey = (val: keyType): boolean => ["string", "number"].includes(typeof val)
 
 
+export type mountTabType = {
+  key?: number | string
+  title?: string
+}
+
 export const tabsEmit = {
   'update:active': checkKey,
   'change': checkKey
 }
+
+export type tabPropsType = Partial<ExtractPropTypes<typeof tabProps>>
+
+
+type TabkeyType = {
+  transmitTab: (info: tabPropsType, cb?: (idx: number) => void) => void,
+  destoryKey: (key?: keyType) => void,
+  currentActive: Ref<keyType>
+}
+
+
+export const tabsKey = Symbol('tabs') as InjectionKey<TabkeyType>

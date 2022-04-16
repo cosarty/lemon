@@ -10,9 +10,10 @@ import { LeCheckBox } from './checkbox'
 import { LeCheckBoxGroup } from './checkbox-group'
 import { LeTabs } from './tabs'
 import { LeTab } from './tab'
+import { LeDrawer } from './drawer'
 
 
 
 export { LeMessageCall }
-export default [LeSelect, LeSelectOption, LeRating, LeSwitch, LeMessageCall, LeModal, LeOverlary, LeModalCall, LeRadio, LeRadioGroup, LeCheckBox, LeCheckBoxGroup, LeTabs, LeTab]
+export default [LeSelect, LeSelectOption, LeRating, LeSwitch, LeMessageCall, LeModal, LeOverlary, LeModalCall, LeRadio, LeRadioGroup, LeCheckBox, LeCheckBoxGroup, LeTabs, LeTab, LeDrawer]
 

@@ -94,7 +94,9 @@ export default defineComponent({
     })
     onMounted(() => {
       nextTick(() => {
-        setOffset(0)
+        setOffset(
+          mountTab.value.findIndex((i) => i.name === currentActive.value)
+        )
       })
     })
 

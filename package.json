@@ -1,0 +1,13 @@
+{
+  "name": "@lemon/package",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "docs":"pnpm -F @lemon/doc docs:dev"
+  },
+  "packageManager": "pnpm",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

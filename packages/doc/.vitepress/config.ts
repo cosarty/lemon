@@ -7,11 +7,16 @@ export default defineConfig({
   description: '学习一下',
   srcDir: 'src',
   markdown: {
+    theme: {
+      light: 'github-light',
+      dark: 'one-dark-pro',
+    },
     lineNumbers: true,
     config: (md) => {
       // console.log('md: ', md);
     },
   },
+  cleanUrls:true,
   themeConfig: {
     editLink: {
       pattern: 'https://github.com/vuejs/vitepress/edit/main/docs/:path',

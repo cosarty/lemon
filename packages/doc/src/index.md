@@ -3,23 +3,27 @@
 layout: home
 
 hero:
+  image:
+    src: /logo.jpg
+    alt: VitePress
   name: "测试网站"
   text: "学习一下"
   tagline: My great project tagline
   actions:
     - theme: brand
-      text: Markdown Examples
+      text: middle_finger
       link: /markdown-examples
     - theme: alt
       text: API Examples
       link: /api-examples
 
 features:
-  - title: Feature A
+  - icon: 
+     src: ./logo.jpg
+    title: A
     details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
   - title: Feature B
     details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
   - title: Feature C
     details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
 ---
-

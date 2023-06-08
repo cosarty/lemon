@@ -1,5 +1,6 @@
 import { defineConfig } from 'vitepress'
 import { resolve } from 'path'
+import { componentPreview, containerPreview } from '@vitepress-demo-preview/plugin'
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   lastUpdated: true,
@@ -13,7 +14,8 @@ export default defineConfig({
     },
     lineNumbers: true,
     config: (md) => {
-      // console.log('md: ', md);
+      md.use(componentPreview)
+      md.use(containerPreview)
     },
   },
   cleanUrls:true,

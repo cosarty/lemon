@@ -63,3 +63,6 @@ export default config
 <!-- <Wave /> -->
 
 [跳转](./api-examples)
+
+
+<preview path="./test.vue" title="基本使用" description="dsa"></preview>
